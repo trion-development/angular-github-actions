@@ -1,0 +1,30 @@
+name: CI
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Clean install dependencies
+        run: npm ci
+
+      - name: Test Angular app with GitHub Actions and Karma
+        uses: docker://trion/ng-cli-karma:9.1
+        with:
+          args: ng test --watch=false --progress=false
+
+      - name: E2E Test Angular app with GitHub Actions and Protractor
+        uses: docker://trion/ng-cli-e2e:9.1
+        with:
+          args: ng e2e
