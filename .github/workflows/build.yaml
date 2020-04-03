@@ -20,11 +20,11 @@ jobs:
         run: npm ci
 
       - name: Test Angular app with GitHub Actions and Karma
-        uses: docker://trion/ng-cli-karma:9.1
+        uses: docker://trion/ng-cli-karma:9.1.0
         with:
           args: ng test --watch=false --progress=false
 
       - name: E2E Test Angular app with GitHub Actions and Protractor
-        uses: docker://trion/ng-cli-e2e:9.1
+        uses: docker://trion/ng-cli-e2e:9.1.0
         with:
           args: ng e2e
