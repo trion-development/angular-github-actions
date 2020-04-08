@@ -30,7 +30,7 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "${GITHUB_ACTOR}@example.com"
           git checkout gh-pages
-          rm -rf !("dist")
+          ls | grep -v dist | xargs rm
           find dist -mindepth 2 -exec mv {} . \;
           rmdir -r dist
           git add .
