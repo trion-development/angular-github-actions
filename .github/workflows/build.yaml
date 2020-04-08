@@ -25,7 +25,7 @@ jobs:
       - name: E2E Test Angular app with GitHub Actions and Protractor
         uses: docker://trion/ng-cli-e2e:latest
         with:
-          args: ng e2e
+          args: /bin/sh -c "ng e2e; chmod -R a+rwx node_modules"
 
       - name: Production build
         uses: docker://trion/ng-cli:latest
