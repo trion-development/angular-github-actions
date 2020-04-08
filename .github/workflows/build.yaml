@@ -5,8 +5,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Check out repository (all branches)
         uses: actions/checkout@v2
+      - run: |
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
 
       - name: Clean install dependencies
         run: npm ci
@@ -27,7 +29,7 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "${GITHUB_ACTOR}@example.com"
-          git checkout -b origin --track origin/gh-pages
+          git checkout gh-pages
           rm -rf !("dist")
           find dist -mindepth 2 -exec mv {} . \;
           rmdir -r dist
