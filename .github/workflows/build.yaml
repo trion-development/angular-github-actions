@@ -27,7 +27,7 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "${GITHUB_ACTOR}@example.com"
-          git checkout gh-pages origin/gh-pages
+          git checkout -b origin --track origin/gh-pages
           rm -rf !("dist")
           find dist -mindepth 2 -exec mv {} . \;
           rmdir -r dist
