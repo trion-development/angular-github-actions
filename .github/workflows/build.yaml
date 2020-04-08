@@ -23,6 +23,12 @@ jobs:
         with:
           args: ng e2e
 
+
+      - name: Production build
+        uses: docker://trion/ng-cli:latest
+        with:
+          args: ng build --prod --progress=false
+
       - name: Berechtigungen fixen
         uses: docker://trion/ng-cli-e2e:latest
         with:
