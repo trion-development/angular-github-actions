@@ -9,6 +9,8 @@ jobs:
         uses: actions/checkout@v2
       - run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+          mkdir dist
+          chmod a+w dist
 
       - name: Clean install dependencies
         run: npm ci
@@ -29,9 +31,9 @@ jobs:
           args: ng build --prod --progress=false --base-href=${GITHUB_REPOSITORY}
 
       - name: Berechtigungen fixen
-        uses: docker://trion/ng-cli-e2e:latest
+        uses: docker://trion/ng-cli:latest
         with:
-          args: chmod -R a+w node_modules
+          args: chmod -R a+w node_modules dist
 
       - name: Deployment auf GitHub Pages
         env:
