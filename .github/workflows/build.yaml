@@ -42,6 +42,7 @@ jobs:
           ls | grep -v dist | xargs rm -r
           find dist -mindepth 2 -exec mv {} . \;
           rm -fr dist
+          grep base index.html
           git add .
           git commit -m "updated GitHub Pages"
           git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
